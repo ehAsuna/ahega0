@@ -25,8 +25,8 @@ module.exports = {
 
   const embed = new MessageEmbed()
     .setColor('#FFB6C1')
-    .setTitle(`${message.author.tag} killed ${user.tag}!`)
-    .setImage(`https://some-random-api.ml/canvas/wasted/?avatar=${user.avatarURL({ format: 'png'})}`);
+    .setTitle(`${user.tag} get rainbowified!`)
+    .setImage(`https://some-random-api.ml/canvas/gay/?avatar=${user.avatarURL({ format: 'png'})}`);
 
   message.channel.send(embed);
   }

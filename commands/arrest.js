@@ -23,6 +23,8 @@ module.exports = {
   if (!user.avatarURL())
     return message.reply(`:x: ${user.tag} profile photo not found.`).then(msg => { msg.delete({ timeout: 3000 })}).catch(console.error);
 
+	if (user.id == message.author.id) return message.reply('You cannot arrest yourself!').then(msg => { msg.delete({ timeout: 3000 })}).catch(console.error);
+
   const embed = new MessageEmbed()
     .setColor('#FFB6C1')
     .setTitle(`${message.author.tag} arrested ${user.tag}!`)
