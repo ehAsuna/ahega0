@@ -1,0 +1,24 @@
+Commands to create:
+ban , kick , report , warn , music , fun/interactives, more anime, unique, MORE GAMES!
+
+Updates after move to v13:
+add button/dropdowns to commands n what not.
+
+Commands to update:
+info commands, old commands, topgg information command.
+
+Features to create:
+auto text moderation/warning, schedule message send, reminder command.
+
+Bot:
+add to online listings
+!! move to VSCODE - host on heroku - update to v13.
+publicize bot on github/make open source.
+premium bot after gaining popularity.
+
+Website:
+update commands, change style, !!new website template.
+
+Random to do:
+check descriptions, syntax , and reqs for ever command.
+review all commands and update as needed (some can be reduced.)

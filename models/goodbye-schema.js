@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const reqString = {
   type: String,
@@ -11,6 +11,6 @@ const welcomeSchema = new mongoose.Schema({
   channelId: reqString,
 	backgroundImage: reqString,
 	color: reqString,
-});
+})
 
-module.exports = mongoose.model('welcome-message', welcomeSchema)
+module.exports = mongoose.model('goodbye-message', welcomeSchema)

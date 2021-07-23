@@ -2,14 +2,17 @@
 const DiscordJS = require('discord.js');
 const WOKCommands = require('wokcommands');
 const dbots = require('dbots');
-require('dotenv').config
+require('dotenv').config;
 
 let test;
 
 const client = new DiscordJS.Client({
 	partials: ['MESSAGE', 'REACTION'],
 });
-require('discord-buttons')(client);
+//require('discord-buttons')(client);
+
+const Levels = require("discord.js-leveling");
+Levels.setURL(process.env.uri);
 
 
 const express = require('express');
@@ -21,11 +24,12 @@ app.get('/', (req, res) => res.send(`Live on Port:${port}`));
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
 
 client.on('ready', () => {
-	const wok = new WOKCommands(client, {
-		commandDir: 'commands',
+	const wok =  new WOKCommands(client, {
+		commandsDir: 'commands',
 		featureDir: 'features',
 		messagePath: '',
-		showWarns: false,
+		showWarns: true,
+		defaultLanguage: 'english',
 		testServers: ['790889521734352966', '842826911838765056'],
 		del: 5,
 	})
@@ -34,6 +38,11 @@ client.on('ready', () => {
 			{
 				name: 'General',
 				emoji: '👌',
+				hidden: false,
+			},
+			{
+				name: 'Moderation',
+				emoji: '📒',
 				hidden: false,
 			},
 			{
@@ -47,18 +56,18 @@ client.on('ready', () => {
 				hidden: false,
 			},
 			{
+				name: 'Music',
+				emoji: '🎶',
+				hidden: false,
+			},
+			{
 				name: 'NSFW',
 				emoji: '🔞',
 				hidden: false,
 			},
 			{
-				name: 'Moderation',
-				emoji: '📒',
-				hidden: false,
-			},
-			{
 				name: 'Configuration',
-				emoji: '🛠',
+				emoji: '🏗',
 				hidden: true,
 			},
 			{
@@ -68,7 +77,8 @@ client.on('ready', () => {
 			},
 		])
 		.setDefaultPrefix('++')
-		.setColor(0xffb6c1);
+		.setColor(0xffb6c1)
+		.setDisplayName('Ahega0')
 
 	const { slashCommands } = wok;
 
@@ -95,7 +105,7 @@ client.on('ready', () => {
 	const poster = new dbots.Poster({
     client,
     apiKeys: {
-      topgg: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4NDk5NDU1NzQ4OTE4NDc3OSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjI0NDY2MzMzfQ.uRdXWB8e7tDhsEz36wDjEh5CxNrcjNShnaC8dKWdmnU',
+      topgg: process.env.topgg,
     },
     clientLibrary: 'discord.js'
   });
@@ -103,7 +113,7 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-	if (message.mentions.users.has(client.user.id)) {
+	if(message.content === `<@!${client.user.id}>`){
 		const newEmbed = new DiscordJS.MessageEmbed()
 			.setColor('#FFB6C1')
 			.setDescription(`<:ahega0:842838420807483402>~**My current prefix is:**   ` + "`" + `${test.getPrefix(message.guild.id)}` + "`");

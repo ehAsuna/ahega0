@@ -1,19 +1,19 @@
-const welcomeSchema = require('../models/welcome-schema')
+const goodbyeSchema = require('../models/goodbye-schema')
 
 const cache = new Map()
 
-const loadData = async () => {
-  const results = await welcomeSchema.find()
+const loadDataGB = async () => {
+  const results = await goodbyeSchema.find()
 
   for (const result of results) {
     cache.set(result.guildId, result.channelId)
   }
 }
-loadData()
+loadDataGB();
 
 module.exports = {
-	name: 'setwelcome',
-  aliases: ['setwelc'],
+	name: 'setgoodbye',
+  aliases: ['setgb'],
   category: 'Moderation',
   description: 'Sets the Goodbye Message channel in your server. Can customize the background image and color!',
   cooldown: '3s',
@@ -24,13 +24,13 @@ module.exports = {
   //slash: true,
   //globalCooldown: '5m',
   //minArgs: 1,
-  //maxArgs: 1,
+  maxArgs: 2,
   expectedArgs: '<background-url(help: https://www.lifewire.com/copy-image-web-address-url-1174175 )> <color(has to be in hex ~ #FF0000, help: https://htmlcolorcodes.com )>',
   permissions: ['ADMINISTRATOR'],
   callback: async ({ message, args }) => {
- 		const { guild, channel } = message;
+		const { guild, channel } = message;
 
-    await welcomeSchema.findOneAndUpdate(
+    await goodbyeSchema.findOneAndUpdate(
       {
         guildId: guild.id,
       },
@@ -47,7 +47,7 @@ module.exports = {
 
     cache.set(guild.id, channel.id);
 
-    message.reply('Welcome channel set!');
+    message.reply('Goodbye message set! Try, ++help setgoodbye for more customization.');
   },
 }
 

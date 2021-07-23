@@ -1,8 +1,8 @@
 module.exports = {
-	name: 'simjoin',
-  aliases: ['simwelc'],
+	name: 'simleave',
+  aliases: ['simexit', 'simgoodbye'],
   category: 'Moderation',
-  description: 'Simulates a join to test welcome message on your server.',
+  description: 'Simulates a leave to test welcome message on your server.',
   //cooldown: '3s',
   hidden: false,
   ownerOnly: false,
@@ -15,6 +15,6 @@ module.exports = {
   //expectedArgs: '<user@>',
   permissions: ['ADMINISTRATOR'],
   callback: ({ message, client, args }) => {
-    client.emit('guildMemberAdd', message.member)
+    client.emit('guildMemberRemove', message.member)
   },
 }

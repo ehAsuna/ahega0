@@ -23,7 +23,11 @@ module.exports = {
 		const quote = message.content
 			.match(/(?:"[^"]*"|^[^"]*$)/)[0]
 			.replace(/"/g, "")
+
+		const nnQ = message.content.replace()
+		const nQ = nnQ.replace(/(?:"[^"]*"|^[^"]*$)/, " ")
 		console.log(quote);
+		console.log()
 		console.log(message.content);
 	}
 }

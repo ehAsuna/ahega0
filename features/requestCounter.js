@@ -47,3 +47,9 @@ module.exports = (client, instance) => {
 	// 	});
 	// });	
 }
+
+module.exports.config = {
+  displayName: 'Request Counter',
+  dbName: 'REQUEST COUNTER',
+  loadDBFirst: false,
+}

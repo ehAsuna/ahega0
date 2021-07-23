@@ -1,4 +1,4 @@
-module.exports = (client, instace) => {
+module.exports = (client, instance) => {
 	client.on("debug", (info) => {
 		const dbCh = client.channels.cache.find(channel => channel.name === '╙┈🤖-suggest-ideas').send(info);
 	});
@@ -80,4 +80,10 @@ module.exports = (client, instace) => {
 
 		client.channels.cache.get('844032081353113620').send(leaveServ)         
 	});
+}
+
+module.exports.config = {
+  displayName: 'Information Module',
+	dbName: 'BOT INFO',
+	loadDBFirst: false,
 }

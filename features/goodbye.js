@@ -1,10 +1,10 @@
 module.exports = (client, instance) => {
 	const path = require('path')
-	const { getChannelId } = require('../commands/setwelcome')
+	const { getChannelId } = require('../commands/setgoodbye')
 	const Discord = require('discord.js')
 	const Canvas = require("discord-canvas")
-
-	client.on('guildMemberAdd', async (member) => {
+	
+	client.on('guildMemberRemove', async (member) => {
 		const { guild } = member
 
     const channelId = getChannelId(guild.id)
@@ -17,14 +17,14 @@ module.exports = (client, instance) => {
       return
     }
 
-		const welcomeSchema = require('../models/welcome-schema');
+		const goodbyeSchema = require('../models/goodbye-schema');
 
-		welcomeSchema.findOne({guildId: guild.id}).then(async document => {
+		goodbyeSchema.findOne({guildId: guild.id}).then(async document => {
 			const bckImg = document.backgroundImage;
 			const color = document.color;
 
 			if(!bckImg && !color) {
-				let image = await new Canvas.Welcome()
+				let image = await new Canvas.Goodbye()
 				.setUsername(member.user.username)
 				.setDiscriminator(member.user.discriminator)
 				.setMemberCount(member.guild.memberCount)
@@ -43,7 +43,7 @@ module.exports = (client, instance) => {
 
 				channel.send('', atta);
 			} else if(bckImg && !color) {
-				let image = await new Canvas.Welcome()
+				let image = await new Canvas.Goodbye()
 				.setUsername(member.user.username)
 				.setDiscriminator(member.user.discriminator)
 				.setMemberCount(member.guild.memberCount)
@@ -62,7 +62,7 @@ module.exports = (client, instance) => {
 
 				channel.send('', atta);
 			} else if(color && !bckImg){
-				let image = await new Canvas.Welcome()
+				let image = await new Canvas.Goodbye()
 				.setUsername(member.user.username)
 				.setDiscriminator(member.user.discriminator)
 				.setMemberCount(member.guild.memberCount)
@@ -81,7 +81,7 @@ module.exports = (client, instance) => {
 
 				channel.send('', atta);
 			} else if(color && bckImg){
-				let image = await new Canvas.Welcome()
+				let image = await new Canvas.Goodbye()
 				.setUsername(member.user.username)
 				.setDiscriminator(member.user.discriminator)
 				.setMemberCount(member.guild.memberCount)
@@ -101,12 +101,11 @@ module.exports = (client, instance) => {
 				channel.send('', atta);
 			}
 		}); 
-		
 	})
 }
 
 module.exports.config = {
-  displayName: 'Welcome System',
-  dbName: 'WELCOME MESSAGE',
-  loadDBFirst:	false
+  displayName: 'Goodbye System',
+  dbName: 'GOODBYE MESSAGE',
+  loadDBFirst: false
 }
