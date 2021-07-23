@@ -27,7 +27,7 @@ const Command: ICommand = {
 
     message.channel.send(lo).then(m => {
 
-      superagent.get('https://nekobot.xyz/api/image').query({ type: 'ass' }).end((err, response) => {
+      superagent.get('https://nekobot.xyz/api/image').query({ type: 'boobs' }).end((err, response) => {
 
         var embed_nsfw = new Discord.MessageEmbed()
           .setDescription(`:underage:\n**[Image not loading? Click  here~>(${response.body.message})**`)
