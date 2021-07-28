@@ -1,26 +1,5 @@
 module.exports = (client, instance) => {
-	client.on("debug", (info) => {
-		const dbCh = client.channels.cache.find(channel => channel.name === '╙┈🤖-suggest-ideas').send(info);
-	});
-
-	client.on("warn", console.log);
-
-	client.on("rateLimit", (rateLimitInfo) => {
-		const Discord = require('discord.js');
-
-		let rlEm = new Discord.MessageEmbed()
-		.setTitle("New Rate limit")
-		.addField(
-			{name: 'My Limit:' , value: rateLimitInfo.limit, inline: true},
-			{name: 'Timeout:' , value: rateLimitInfo.timeout, inline: true},
-			{name: 'Method:' , value: rateLimitInfo.method, inline: true},
-			{name: 'Path:' , value: rateLimitInfo.path, inline: true},
-			{name: 'Route:' , value: rateLimitInfo.route, inline: true},
-		);
-
-		client.channels.cache.find(channel => channel.name === '╙┈🤖-rate-limits').send(rlEm);
-	});
-
+	
 	client.on('guildCreate', (guild) => {
 		const Discord = require('discord.js');
 

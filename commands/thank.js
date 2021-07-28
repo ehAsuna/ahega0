@@ -1,11 +1,10 @@
 const thankSchema = require('../models/thank-schema')
-
 module.exports = {
 	name: 'thank',
   aliases: ['thankyou'],
   category: 'General',
   description: 'Thank a user for their good-doings.',
-  cooldown: '1s',
+  cooldown: '3h',
   hidden: false,
   ownerOnly: false,
   guildOnly: true,
@@ -16,7 +15,7 @@ module.exports = {
   //maxArgs: 1,
   expectedArgs: '<user@-or-userId>',
   //permissions: ['ADMINISTRATOR'],
-  callback: async ({ message, args }) => {
+  callback: async ({ client, message, args }) => {
 		let user;
 		if (args[0] && isNaN(args[0])) user = message.mentions.users.first();
 		if (args[0] && !isNaN(args[0])) {
@@ -30,13 +29,21 @@ module.exports = {
 
 		user = user.id;
 		
-    thankSchema.findOneAndUpdate({
-      userId: user
-    }, {
-			userId: user,
-      $inc: {total: 1}
-    }, {
-      upsert: true
-    });
+    await thankSchema.findOneAndUpdate(
+			{
+      	userId: user
+    	}, 
+			{
+				userId: user,
+      	$inc: {total: 1},
+    	},
+			{
+      	upsert: true
+    	}
+		);
+
+		thankSchema.findOne({userId: user}).then(async document => {
+			return message.reply(`<@${user}> now has ${document.total} thanks!`)
+		});
 	},
 }
