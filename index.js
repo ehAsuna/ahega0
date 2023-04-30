@@ -1,4 +1,3 @@
-// https://discord.com/oauth2/authorize?client_id=841777441117831189&scope=bot&permissions=8589934583
 const DiscordJS = require('discord.js');
 const WOKCommands = require('wokcommands');
 const dbots = require('dbots');
@@ -95,7 +94,7 @@ client.on('ready', () => {
 	const poster = new dbots.Poster({
     client,
     apiKeys: {
-      topgg: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4NDk5NDU1NzQ4OTE4NDc3OSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjI0NDY2MzMzfQ.uRdXWB8e7tDhsEz36wDjEh5CxNrcjNShnaC8dKWdmnU',
+      topgg: 'topgg',
     },
     clientLibrary: 'discord.js'
   });
